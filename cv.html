@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV — Laura Marquez Carro</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* === Estilos específicos del CV === */
+
+    /* Contenedor principal del CV */
+    .cv {
+      display: grid;
+      gap: 18px;
+    }
+
+    /* Cabecera con nombre + foto */
+    .cv-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* Nombre principal */
+    .cv-name {
+      font-size: clamp(26px, 3.8vw, 40px);
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    /* Puesto o especialidad */
+    .cv-role {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2.2vw, 20px);
+    }
+
+    /* Contenedor y estilo de la foto */
+    .cv-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .cv-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Línea con datos de contacto */
+    .cv-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .cv-meta a {
+      color: inherit;
+      text-decoration: underline dotted;
+    }
+
+    /* Estructura general: izquierda/derecha */
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+    }
+
+    /* Diseño responsive */
+    @media (max-width: 900px) {
+      .cv-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-header {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Títulos de sección */
+    .cv-section h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    /* Tarjetas de contenido */
+    .cv-item {
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015));
+    }
+
+    /* Fechas y lugares */
+    .cv-item .when {
+      color: #9fb5ff;
+      font-weight: 600;
+    }
+
+    .cv-item .where {
+      color: #cbd3ea;
+    }
+
+    /* Etiquetas visuales */
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(110, 168, 254, .35);
+      background: rgba(110, 168, 254, .15);
+      font-size: 12px;
+      color: #cfe5ff;
+    }
+
+    /* Botones superiores (descargar CV, etc.) */
+    .cv-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Versión para impresión A4 */
+    @media print {
+
+      header,
+      footer,
+      .cv-actions {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+        color: #111;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 0;
+      }
+
+      .cv-photo {
+        border-color: #ccc;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Barra superior con nombre y menú -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html"><span class="logo">LM</span><span>Laura Marquez</span></a>
+      <nav class="menu">
+        <a href="projects.html">Proyectos</a>
+        <a href="formacion.html">Formación</a>
+        <a href="cv.html" class="active">CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="container">
+    <!-- Título y botones de acción -->
+    <div class="section-title">
+      <h2>Currículum</h2>
+      <div class="cv-actions">
+        <a class="btn primary" href="docs/CV.pdf" download>Descargar CV (PDF)</a>
+      </div>
+    </div>
+
+    <!-- Sección principal del CV -->
+    <section class="card cv">
+
+      <!-- Cabecera con datos personales -->
+      <div class="cv-header">
+        <div>
+          <h1 class="cv-name">Laura Marquez Carro</h1>
+          <p class="cv-role">Strategic Communication</p>
+          <div class="cv-meta">
+            <span>Santiago de Compostela · España</span>
+            <span>·</span>
+            <a href="mailto:laura@email.com">laura@email.com</a>
+            <span>·</span>
+            <a href="tel:+34123456789">+34 123 456 789</a>
+            <span>·</span>
+            <a target="_blank" rel="noopener" href="#">LinkedIn</a>
+          </div>
+        </div>
+        <figure class="cv-photo"><img src="img/laura.jpg" alt="Foto de Laura Marquez Carro"></figure>
+      </div>
+
+      <!-- Resumen profesional -->
+      <div class="cv-section">
+        <h3>Resumen</h3>
+        <div class="cv-item">
+          Hola! Soy Laura una joven formada en el campo de la Publicidad, con una gran pasión en la creación visual y el
+          contenido digital. Actualmente el MBA de Administración de Empresas. Gozo de amplia experiencia en fotografía
+          y diseño gráfico. Me motiva el deseo de aprender constantemente y enfrentar nuevos retos, lo que me lleva a
+          tener una mente creativa y resolutiva.
+          Busco cada oportunidad de seguir desarrollando mis habilidades y contribuir en proyectos que generen un cambio
+          significativo. Creo firmemente que la comunicación efectiva puede transformar el mundo.
+          Siempre estoy abierta a nuevas colaboraciones y retos que me permitan seguir explorando el fascinante mundo de
+          la comunicación.
+        </div>
+      </div>
+
+      <!-- Dos columnas: experiencia/proyectos y formación/habilidades -->
+      <div class="cv-grid">
+
+        <!-- Izquierda -->
+        <div class="cv-col">
+          <div class="cv-section">
+            <h3>Experiencia</h3>
+            <article class="cv-item">
+              <div class="when">2024 — Actualidad</div>
+              <div><strong>Consultora de Comunicación</strong> · Agencia XYZ</div>
+              <div class="where">A Coruña · Híbrido</div>
+              <ul>
+                <li>Diseño de planes de comunicación para lanzamientos.</li>
+                <li>Gestión de RRSS y coordinación con paid media.</li>
+                <li>Elaboración de press kits y relación con medios.</li>
+              </ul>
+            </article>
+
+            <article class="cv-item">
+              <div class="when">Sep. 2021 – Sep. 2022</div>
+              <div><strong>Azafata de eventos y asesora técnica en protocolo e intermediaria de medios</strong> ·
+                Pont-Up Store</div>
+              <div class="where">Santiago de Compostela · On-site</div>
+              <ul>
+                <li>Responsable del cumplimiento del protocolo en el evento así como ayudante en la comunicación durante
+                  su celebración 2 años consecutivos.</li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- Proyectos -->
+          <div class="cv-section">
+            <h3>Proyectos destacados</h3>
+            <article class="cv-item">
+              <div><strong>Campaña \"Marca Región\"</strong> — reposicionamiento turístico</div>
+              <ul>
+                <li>Definición de relato y línea visual con dirección creativa.</li>
+                <li>Integración con medios digitales y prensa.</li>
+              </ul>
+            </article>
+
+            <article class="cv-item">
+              <div><strong>Guía de Estilo y Mensajería</strong> — startup SaaS</div>
+              <ul>
+                <li>Creación de manual de tono y mensajes.</li>
+                <li>Reducción de tiempo de respuesta en 18%.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <!-- Derecha -->
+        <aside class="cv-col">
+          <!-- Formación -->
+          <div class="cv-section">
+            <h3>Formación</h3>
+            <article class="cv-item">
+              <div class="when">2021 - 2025</div>
+              <div><strong>Grado de publicidad y relaciones públicas</strong></div>
+              <div class="where">Universidad de Vigo</div>
+            </article>
+            <article class="cv-item">
+              <div class="when">2025 - Actualidad</div>
+              <div><strong>MBA Máster en dirección y administración de empresas </strong></div>
+              <div class="where">Galicia Business School </div>
+            </article>
+          </div>
+
+          <!-- Competencias -->
+          <div class="cv-section">
+            <h3>Competencias</h3>
+            <div class="cv-item">
+              <div class="tags" style="margin:0">
+                <span class="tag">Comunicación estratégica</span>
+                <span class="tag">Narrativa de marca</span>
+                <span class="tag">Planificación editorial</span>
+                <span class="tag">Gestión de medios</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Herramientas -->
+          <div class="cv-section">
+            <h3>Herramientas</h3>
+            <div class="cv-item">
+              <div class="tags" style="margin:0">
+                <span class="tag">Photoshop</span>
+                <span class="tag">Adobe</span>
+                <span class="tag">Illustrator</span>
+                <span class="tag">Canva</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Idiomas -->
+          <div class="cv-section">
+            <h3>Idiomas</h3>
+            <div class="cv-item">
+              <ul style="margin:0; padding-left:18px">
+                <li>Español — Nativo</li>
+                <li>Gallego — Nativo</li>
+                <li>Inglés — B2/C1</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

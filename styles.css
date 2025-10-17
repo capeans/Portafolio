@@ -1,0 +1,276 @@
+/* === Variables globales de color y estilo === */
+:root {
+  --bg: #0f1220;              /* Color de fondo principal */
+  --panel: #171b2e;           /* Color de paneles o tarjetas */
+  --text: #e9ecf1;            /* Texto principal */
+  --muted: #a9b1c7;           /* Texto secundario o apagado */
+  --brand: #6ea8fe;           /* Color de acento principal */
+  --brand2: #7ef0d6;          /* Segundo color de acento */
+  --ring: 0 0 0 3px rgba(110, 168, 254, .25); /* Sombra usada en hover o focus */
+}
+
+/* === Ajustes globales básicos === */
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Helvetica Neue, Arial;
+  background: var(--bg);      /* Fondo liso oscuro */
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;             /* Los enlaces usan el color del texto */
+  text-decoration: none;
+}
+
+.container {
+  width: min(1100px, 92%);    /* Contenedor centrado con ancho máximo */
+  margin-inline: auto;
+}
+
+/* === Sección de portada (index.html) === */
+.cover {
+  min-height: 100dvh;         /* Ocupa toda la altura de la pantalla */
+  display: grid;
+  place-items: center;
+  padding: 40px 0;
+}
+
+/* Tarjetas con efecto sutil */
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015));
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
+  padding: 28px;
+}
+
+/* Diseño de la portada en dos columnas */
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+/* Versión móvil (una sola columna) */
+@media(max-width:900px) {
+  .cover-grid { grid-template-columns: 1fr; }
+}
+
+/* Nombre principal en portada */
+.name {
+  font-size: clamp(28px, 4.8vw, 56px);
+  line-height: 1.05;
+  margin: 4px 0 6px;
+}
+
+/* Puesto o subtítulo */
+.role {
+  font-size: clamp(16px, 2.2vw, 22px);
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+
+/* Botones de la portada */
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* === Botones generales === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: #0f1426;        /* Fondo oscuro del botón */
+  min-width: 140px;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--brand), var(--brand2)); /* Botón de color principal */
+  color: #0b0e1d;
+  font-weight: 700;
+}
+
+.btn:hover {
+  transform: translateY(-1px); /* Efecto de elevación */
+  box-shadow: 0 8px 30px -8px rgba(0, 0, 0, .4);
+}
+
+/* === Imagen de portada === */
+.photo {
+  aspect-ratio: 1/1;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .08);
+  background: #0d1123;        /* Fondo detrás de la foto */
+  display: grid;
+  place-items: center;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* La imagen llena el contenedor sin deformarse */
+}
+
+/* Texto auxiliar pequeño */
+.hint {
+  color: #c5cbe0;
+  font-size: 12px;
+  opacity: .75;
+  text-align: right;
+  margin-top: 6px;
+}
+
+/* === Páginas internas (proyectos, formación, CV) === */
+header {
+  position: sticky;           /* Se mantiene visible al hacer scroll */
+  top: 0;
+  background: rgba(15, 18, 32, .7);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+/* Navegación superior */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+/* Marca con logo + texto */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+/* Logotipo redondeado */
+.logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  display: grid;
+  place-items: center;
+  color: #0b0e1d;
+  font-weight: 900;
+}
+
+/* Menú principal */
+.menu {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.menu a {
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+}
+
+.menu a.active,
+.menu a:hover {
+  box-shadow: var(--ring);    /* Resalta el enlace activo */
+  color: var(--text);
+}
+
+/* === Contenido de las secciones internas === */
+main {
+  padding-block: 36px;        /* Espaciado superior e inferior */
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+/* Cuadrícula de proyectos */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Adaptación de columnas en pantallas pequeñas */
+@media(max-width:900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:620px) { .grid { grid-template-columns: 1fr; } }
+
+/* Tarjeta individual de proyecto */
+.proj {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015));
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+/* Miniatura del proyecto */
+.thumb {
+  height: 160px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: #10162a;
+  color: #cbd3ea;
+  border: 1px solid rgba(255, 255, 255, .08);
+}
+
+/* Etiquetas de habilidades o categorías */
+.pill {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #cfe5ff;
+  background: rgba(110, 168, 254, .15);
+  border: 1px solid rgba(110, 168, 254, .35);
+}
+
+/* === Tablas (usadas en Formación) === */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table td, .table th {
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  padding: 10px 8px;
+  text-align: left;
+}
+
+/* Campos de entrada (formularios) */
+.in {
+  width: 100%;
+  padding: 12px;
+  background: #0b0f1f;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  color: var(--text);
+}
+
+.in:focus {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* Centrado de texto */
+.center { text-align: center; }
