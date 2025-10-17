@@ -1,12 +1,12 @@
-/* === Variables globales de color y estilo === */
+/* === Variables globales de color y estilo (tema rojo) === */
 :root {
-  --bg: #0f1220;              /* Color de fondo principal */
-  --panel: #171b2e;           /* Color de paneles o tarjetas */
-  --text: #e9ecf1;            /* Texto principal */
-  --muted: #a9b1c7;           /* Texto secundario o apagado */
-  --brand: #6ea8fe;           /* Color de acento principal */
-  --brand2: #7ef0d6;          /* Segundo color de acento */
-  --ring: 0 0 0 3px rgba(110, 168, 254, .25); /* Sombra usada en hover o focus */
+  --bg: #0f0f13;              /* Fondo neutro oscuro para que el rojo destaque */
+  --panel: #171822;           /* Paneles / tarjetas */
+  --text: #f2f3f5;            /* Texto principal */
+  --muted: #aeb3bd;           /* Texto secundario */
+  --brand: #ff3646;           /* Rojo principal (saturado, elegante) */
+  --brand2: #ff6b6b;          /* Rojo claro para degradados */
+  --ring: 0 0 0 3px rgba(255, 54, 70, .25); /* Halo de enfoque/hover */
 }
 
 /* === Ajustes globales básicos === */
@@ -17,24 +17,21 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Helvetica Neue, Arial;
-  background: var(--bg);      /* Fondo liso oscuro */
+  background: var(--bg);
   color: var(--text);
   line-height: 1.6;
 }
 
-a {
-  color: inherit;             /* Los enlaces usan el color del texto */
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
 .container {
-  width: min(1100px, 92%);    /* Contenedor centrado con ancho máximo */
+  width: min(1100px, 92%);
   margin-inline: auto;
 }
 
 /* === Sección de portada (index.html) === */
 .cover {
-  min-height: 100dvh;         /* Ocupa toda la altura de la pantalla */
+  min-height: 100dvh;
   display: grid;
   place-items: center;
   padding: 40px 0;
@@ -42,7 +39,7 @@ a {
 
 /* Tarjetas con efecto sutil */
 .card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015));
+  background: linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .02));
   border: 1px solid rgba(255, 255, 255, .08);
   border-radius: 20px;
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
@@ -58,9 +55,7 @@ a {
 }
 
 /* Versión móvil (una sola columna) */
-@media(max-width:900px) {
-  .cover-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 900px) { .cover-grid { grid-template-columns: 1fr; } }
 
 /* Nombre principal en portada */
 .name {
@@ -77,33 +72,27 @@ a {
 }
 
 /* Botones de la portada */
-.actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* === Botones generales === */
+/* === Botones === */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 12px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 16px; border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, .10);
-  background: #0f1426;        /* Fondo oscuro del botón */
+  background: #12141b;
   min-width: 140px;
 }
 
 .btn.primary {
-  background: linear-gradient(135deg, var(--brand), var(--brand2)); /* Botón de color principal */
-  color: #0b0e1d;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  color: #1b0e10;
   font-weight: 700;
 }
 
+.btn.ghost { background: transparent; border-color: rgba(255, 255, 255, .16); }
+
 .btn:hover {
-  transform: translateY(-1px); /* Efecto de elevación */
+  transform: translateY(-1px);
   box-shadow: 0 8px 30px -8px rgba(0, 0, 0, .4);
 }
 
@@ -113,110 +102,84 @@ a {
   border-radius: 22px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .08);
-  background: #0d1123;        /* Fondo detrás de la foto */
+  background: #0d111a;
   display: grid;
   place-items: center;
 }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
 
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;          /* La imagen llena el contenedor sin deformarse */
+/* Variante circular (portada y CV) */
+.photo.circle { border-radius: 50%; position: relative; box-shadow: 0 10px 30px -15px rgba(0,0,0,.6); }
+.photo.circle::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(255, 54, 70, .20); pointer-events: none;
 }
 
 /* Texto auxiliar pequeño */
-.hint {
-  color: #c5cbe0;
-  font-size: 12px;
-  opacity: .75;
-  text-align: right;
-  margin-top: 6px;
-}
+.hint { color: #c5cbe0; font-size: 12px; opacity: .75; text-align: right; margin-top: 6px; }
 
 /* === Páginas internas (proyectos, formación, CV) === */
 header {
-  position: sticky;           /* Se mantiene visible al hacer scroll */
-  top: 0;
+  position: sticky; top: 0;
   background: rgba(15, 18, 32, .7);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, .06);
 }
 
-/* Navegación superior */
+/* Navegación */
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 12px 0;
 }
-
-/* Marca con logo + texto */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-}
-
-/* Logotipo redondeado */
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
 .logo {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 34px; height: 34px; border-radius: 10px;
   background: linear-gradient(135deg, var(--brand), var(--brand2));
-  display: grid;
-  place-items: center;
-  color: #0b0e1d;
-  font-weight: 900;
+  display: grid; place-items: center; color: #1b0e10; font-weight: 900;
 }
+.menu { display: flex; gap: 8px; flex-wrap: wrap; }
+.menu a { padding: 8px 12px; border-radius: 10px; color: var(--muted); }
+.menu a.active, .menu a:hover { box-shadow: var(--ring); color: var(--text); }
 
-/* Menú principal */
-.menu {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.menu a {
-  padding: 8px 12px;
-  border-radius: 10px;
-  color: var(--muted);
-}
-
-.menu a.active,
-.menu a:hover {
-  box-shadow: var(--ring);    /* Resalta el enlace activo */
-  color: var(--text);
-}
-
-/* === Contenido de las secciones internas === */
-main {
-  padding-block: 36px;        /* Espaciado superior e inferior */
-}
-
+/* Contenido principal */
+main { padding-block: 36px; }
 .section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 18px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 18px 0;
 }
 
-/* Cuadrícula de proyectos */
+/* === Títulos con línea de acento roja (puedes usarlo fuera de CV si quieres) === */
+.accent-title { position: relative; padding-left: 12px; margin: 0; }
+.accent-title::before{
+  content: ""; position: absolute; left: 0; top: .35em; width: 6px; height: 1.1em; border-radius: 6px;
+  background: linear-gradient(180deg, var(--brand), var(--brand2));
+  box-shadow: 0 0 0 1px rgba(255, 54, 70, .18);
+}
+
+/* === Chips (contacto/metadata) === */
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+  font-size: 14px; color: var(--text);
+}
+.chip a { color: inherit; text-decoration: none; }
+.chip small { color: var(--muted); }
+
+/* === Grid de proyectos === */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
-
-/* Adaptación de columnas en pantallas pequeñas */
-@media(max-width:900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media(max-width:620px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
 
 /* Tarjeta individual de proyecto */
-.proj {
-  background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015));
+.proj, .card.fine {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .02));
   border: 1px solid rgba(255, 255, 255, .08);
   border-radius: 16px;
   padding: 16px;
@@ -224,53 +187,245 @@ main {
 
 /* Miniatura del proyecto */
 .thumb {
-  height: 160px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: #10162a;
-  color: #cbd3ea;
-  border: 1px solid rgba(255, 255, 255, .08);
+  height: 160px; border-radius: 12px; display: grid; place-items: center;
+  background: #151826; color: #d9deea; border: 1px solid rgba(255, 255, 255, .08);
 }
 
-/* Etiquetas de habilidades o categorías */
-.pill {
-  display: inline-flex;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  color: #cfe5ff;
-  background: rgba(110, 168, 254, .15);
-  border: 1px solid rgba(110, 168, 254, .35);
+/* Etiquetas tipo "pill" (compat) y "tag" (nuevo) en rojo */
+.pill, .tag {
+  display: inline-flex; gap: 6px;
+  padding: 6px 10px; border-radius: 999px; font-size: 12px;
+  color: #ffecef; background: rgba(255, 54, 70, .12);
+  border: 1px solid rgba(255, 54, 70, .35);
 }
 
-/* === Tablas (usadas en Formación) === */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
+/* === Tablas (usadas en Formación, si las mantienes) === */
+.table { width: 100%; border-collapse: collapse; }
 .table td, .table th {
   border-bottom: 1px solid rgba(255, 255, 255, .08);
-  padding: 10px 8px;
-  text-align: left;
+  padding: 10px 8px; text-align: left;
 }
 
-/* Campos de entrada (formularios) */
+/* === Formularios (si usas inputs) === */
 .in {
-  width: 100%;
-  padding: 12px;
-  background: #0b0f1f;
+  width: 100%; padding: 12px; background: #12141b;
   border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 10px;
-  color: var(--text);
+  border-radius: 10px; color: var(--text);
 }
-
-.in:focus {
-  outline: none;
-  box-shadow: var(--ring);
-}
+.in:focus { outline: none; box-shadow: var(--ring); }
 
 /* Centrado de texto */
 .center { text-align: center; }
+
+/* === Utilidades de estilo unificado extra === */
+
+/* Foto circular ya definida arriba con .photo.circle */
+
+/* Tarjeta fina reutilizable (ya incluida como .card.fine) */
+
+/* Timeline (LIMPIO: sin línea ni puntos) para Formación/Experiencia */
+.timeline {
+  display: grid;
+  gap: 18px;
+  position: relative;
+  padding-left: 0;            /* sin margen lateral */
+}
+.timeline::before,
+.t-item::before { content: none !important; }  /* elimina línea y puntos */
+
+.t-item {
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  padding: 16px 18px;
+  transition: background .3s, transform .2s;
+}
+.t-item:hover {
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  transform: translateY(-2px);
+}
+.t-item .when { color: #ff8a95; font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.t-item .where { color: #cbd3ea; font-size: 14px; }
+.t-item h4 { margin: .5px 0 6px; font-size: 16px; }
+
+/* === SECCIÓN CURRÍCULUM (CV) — VERSIÓN LIMPIA SIN LÍNEAS NI PUNTOS === */
+.cv { display: grid; gap: 36px; }
+
+/* Tarjeta principal del CV */
+.cv.card {
+  padding: 40px 44px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+  box-shadow: 0 20px 50px -25px rgba(0,0,0,.6);
+}
+
+/* Cabecera del CV */
+.cv-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 28px;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 12px;
+}
+
+.cv-name { font-size: clamp(28px, 4vw, 42px); margin: 0; line-height: 1.1; }
+.cv-role { color: var(--muted); font-size: clamp(16px, 2vw, 20px); margin-top: 6px; }
+
+/* Foto circular en CV */
+.cv-photo {
+  width: 140px; height: 140px; border-radius: 50%;
+  overflow: hidden; border: 2px solid rgba(255,255,255,.15);
+  box-shadow: 0 6px 20px -10px rgba(0,0,0,.5);
+}
+.cv-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Datos de contacto */
+.cv-meta {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  color: var(--muted); margin-top: 10px; font-size: 15px;
+}
+.cv-meta a { color: var(--brand2); text-decoration: none; }
+.cv-meta a:hover { text-decoration: underline; }
+
+/* Secciones del CV */
+.cv-section { padding-top: 18px; }
+.cv-section h3 { font-size: 20px; margin-bottom: 14px; color: var(--text); font-weight: 600; }
+
+/* Grid izquierda/derecha */
+.cv-grid {
+  display: grid; grid-template-columns: 1.2fr .8fr; gap: 30px;
+}
+@media (max-width: 900px) { .cv-grid { grid-template-columns: 1fr; } }
+
+/* Tarjetas internas del CV */
+.cv-item {
+  padding: 18px 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  transition: background .3s, transform .2s;
+}
+.cv-item:hover { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); transform: translateY(-2px); }
+
+/* Fechas y lugares */
+.cv-item .when { color: var(--brand2); font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.cv-item .where { color: #cbd3ea; font-size: 14px; }
+
+/* Listas limpias */
+.cv-item ul { padding-left: 20px; margin: 8px 0 0; }
+.cv-item li { margin: 6px 0; line-height: 1.55; }
+
+/* Etiquetas de habilidades */
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.tag {
+  padding: 5px 10px; border-radius: 999px;
+  border: 1px solid rgba(255, 54, 70, .35);
+  background: rgba(255, 54, 70, .12);
+  color: #ffecef; font-size: 12px;
+}
+
+/* Botones superiores visibles (Descargar / Imprimir / Volver) */
+.cv-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.cv-actions .btn {
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  color: #fff; font-weight: 600; border: none;
+  transition: background .3s, transform .2s;
+}
+.cv-actions .btn:hover {
+  background: linear-gradient(135deg, var(--brand2), var(--brand));
+  transform: translateY(-2px);
+}
+
+/* Botón secundario (volver) */
+.cv-actions .btn.ghost {
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,.15);
+}
+.cv-actions .btn.ghost:hover { background: rgba(255,255,255,.15); }
+
+/* Responsive CV */
+@media (max-width: 720px) {
+  .cv.card { padding: 28px; }
+  .cv-header { gap: 20px; }
+  .cv-photo { width: 120px; height: 120px; }
+  .cv-section h3 { font-size: 18px; }
+  .cv-item { padding: 16px; }
+}
+
+/* ===== Header opaco (sin translucidez) ===== */
+header {
+  position: sticky;
+  top: 0;
+  background: var(--panel);                /* sólido y opaco */
+  backdrop-filter: none;                   /* sin blur */
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  z-index: 50;
+}
+
+/* ===== Formación — diseño simétrico en rejilla ===== */
+.edu-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;          /* dos columnas simétricas */
+  gap: 18px;
+}
+@media (max-width: 900px){
+  .edu-grid{ grid-template-columns: 1fr; } /* en móvil, una columna */
+}
+
+/* Tarjeta de formación */
+.edu-card{
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+  padding: 16px 18px;
+  transition: transform .2s, background .3s;
+}
+.edu-card:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+}
+
+/* Cabecera de la tarjeta (título a la izquierda, fechas a la derecha) */
+.edu-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.edu-title{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+.edu-period{
+  color: #ff8a95;               /* rojo claro coherente */
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Línea secundaria (centro e info) */
+.edu-meta{
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* Etiquetas opcionales (si quieres destacar área, modalidad, etc.) */
+.edu-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px }
+.edu-tag{
+  padding: 4px 8px; font-size: 12px; border-radius: 999px;
+  color: #ffecef; background: rgba(255,54,70,.12);
+  border: 1px solid rgba(255,54,70,.35);
+}
+
+/* Separador de sección dentro de Formación */
+.forma-section{ margin-top: 24px; }
+.forma-section .accent-title{ margin-bottom: 10px; }

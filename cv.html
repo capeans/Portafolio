@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,163 +7,136 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-    /* === Estilos específicos del CV === */
+    /* ===== Mejora estética del CV (encima de styles.css) ===== */
 
-    /* Contenedor principal del CV */
-    .cv {
-      display: grid;
-      gap: 18px;
-    }
+    /* Layout general del CV */
+    .cv { display: grid; gap: 22px; }
 
-    /* Cabecera con nombre + foto */
+    /* Cabecera */
     .cv-header {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 16px;
+      gap: 20px;
       align-items: center;
     }
-
-    /* Nombre principal */
     .cv-name {
-      font-size: clamp(26px, 3.8vw, 40px);
-      line-height: 1.1;
-      margin: 0;
+      font-size: clamp(30px, 4.2vw, 48px);
+      line-height: 1.05;
+      margin: 0 0 4px;
+      letter-spacing: .2px;
     }
-
-    /* Puesto o especialidad */
     .cv-role {
-      margin: 4px 0 0;
+      margin: 0;
       color: var(--muted);
-      font-size: clamp(16px, 2.2vw, 20px);
+      font-size: clamp(16px, 2.1vw, 20px);
     }
 
-    /* Contenedor y estilo de la foto */
+    /* Foto circular con aro suave */
     .cv-photo {
-      width: 110px;
-      height: 110px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, .12);
+      width: 120px; height: 120px; border-radius: 50%;
+      overflow: hidden; position: relative;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px -15px rgba(0,0,0,.6);
+    }
+    .cv-photo::after{
+      content:""; position:absolute; inset:0; border-radius:50%;
+      box-shadow: inset 0 0 0 2px rgba(110,168,254,.18);
+      pointer-events:none;
+    }
+    .cv-photo img{ width:100%; height:100%; object-fit:cover; }
+
+    /* Chips de contacto */
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      font-size:14px; color: var(--text);
+    }
+    .chip a{ color:inherit; text-decoration:none; }
+    .chip small{ color: var(--muted) }
+
+    /* Título de bloque con línea acento */
+    .cv-section h3{
+      margin:0 0 10px; font-size:18px; letter-spacing:.2px;
+      position:relative; padding-left:12px;
+    }
+    .cv-section h3::before{
+      content:""; position:absolute; left:0; top:.35em;
+      width:6px; height:1.1em;
+      border-radius:6px;
+      background: linear-gradient(180deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 0 1px rgba(110,168,254,.18);
     }
 
-    .cv-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* Tarjetas finas */
+    .cv-card{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      padding:16px;
     }
 
-    /* Línea con datos de contacto */
-    .cv-meta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      color: var(--muted);
+    /* Grid 2 columnas */
+    .cv-grid{ display:grid; grid-template-columns:1.25fr .85fr; gap:22px; }
+    @media (max-width: 900px){
+      .cv-header{ grid-template-columns: 1fr; }
+      .cv-grid{ grid-template-columns: 1fr; }
     }
 
-    .cv-meta a {
-      color: inherit;
-      text-decoration: underline dotted;
+    /* Timeline de experiencia */
+    .timeline{ position:relative; display:grid; gap:14px; }
+    .timeline::before{
+      content:""; position:absolute; left:12px; top:0; bottom:0;
+      width:2px; background: linear-gradient(180deg, rgba(110,168,254,.5), rgba(126,240,214,.3));
+      border-radius:2px; opacity:.7;
+    }
+    .t-item{
+      position:relative; padding-left:34px;
+    }
+    .t-item::before{
+      content:""; position:absolute; left:6px; top:6px;
+      width:12px; height:12px; border-radius:50%;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 0 3px rgba(110,168,254,.25);
+    }
+    .when{ color:#9fb5ff; font-weight:600; font-size:14px; }
+    .where{ color:#cbd3ea; font-size:14px; }
+    .t-item h4{ margin:.5px 0 6px; font-size:16px; }
+
+    /* Lista compacta y legible */
+    .t-item ul, .cv-card ul{ margin:8px 0 0; padding-left:18px }
+    .t-item li, .cv-card li{ margin:4px 0 }
+
+    /* Etiquetas */
+    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px }
+    .tag{
+      padding:5px 10px; border-radius:999px;
+      border:1px solid rgba(110,168,254,.35);
+      background: rgba(110,168,254,.12);
+      font-size:12px; color:#d9e9ff;
     }
 
-    /* Estructura general: izquierda/derecha */
-    .cv-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
+    /* Acciones (descargar/imprimir) */
+    .cv-actions{ display:flex; gap:10px; flex-wrap:wrap }
+    .btn.ghost{
+      background: transparent; border-color: rgba(255,255,255,.14);
     }
 
-    /* Diseño responsive */
-    @media (max-width: 900px) {
-      .cv-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cv-header {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Títulos de sección */
-    .cv-section h3 {
-      margin: 0 0 8px;
-      font-size: 20px;
-    }
-
-    /* Tarjetas de contenido */
-    .cv-item {
-      padding: 14px;
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015));
-    }
-
-    /* Fechas y lugares */
-    .cv-item .when {
-      color: #9fb5ff;
-      font-weight: 600;
-    }
-
-    .cv-item .where {
-      color: #cbd3ea;
-    }
-
-    /* Etiquetas visuales */
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .tag {
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(110, 168, 254, .35);
-      background: rgba(110, 168, 254, .15);
-      font-size: 12px;
-      color: #cfe5ff;
-    }
-
-    /* Botones superiores (descargar CV, etc.) */
-    .cv-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    /* Versión para impresión A4 */
-    @media print {
-
-      header,
-      footer,
-      .cv-actions {
-        display: none !important;
-      }
-
-      body {
-        background: white;
-        color: #111;
-      }
-
-      .card {
-        box-shadow: none;
-        border: 0;
-      }
-
-      .cv-photo {
-        border-color: #ccc;
-      }
-
-      a {
-        text-decoration: none;
-        color: #000;
-      }
+    /* Impresión A4 limpia */
+    @media print{
+      header, .cv-actions { display:none !important; }
+      body{ background:#fff; color:#111 }
+      .card{ box-shadow:none; border:0 }
+      .cv-photo::after{ box-shadow: inset 0 0 0 0 transparent }
+      a{ color:#000; text-decoration:none }
     }
   </style>
 </head>
 
 <body>
-  <!-- Barra superior con nombre y menú -->
+  <!-- Cabecera mínima del sitio -->
   <header>
     <div class="container nav">
       <a class="brand" href="index.html"><span class="logo">LM</span><span>Laura Marquez</span></a>
@@ -176,155 +148,162 @@
     </div>
   </header>
 
-  <!-- Contenido principal -->
   <main class="container">
-    <!-- Título y botones de acción -->
+    <!-- Encabezado de la página + acciones -->
     <div class="section-title">
-      <h2>Currículum</h2>
+      <h2 class="accent-title">Currículum</h2>
       <div class="cv-actions">
         <a class="btn primary" href="docs/CV.pdf" download>Descargar CV (PDF)</a>
+        <button class="btn ghost" onclick="window.print()">Imprimir / Guardar como PDF</button>
       </div>
     </div>
 
-    <!-- Sección principal del CV -->
-    <section class="card cv">
-
-      <!-- Cabecera con datos personales -->
+    <!-- Bloque de CV -->
+    <section class="cv card">
+      <!-- Cabecera personal -->
       <div class="cv-header">
         <div>
           <h1 class="cv-name">Laura Marquez Carro</h1>
-          <p class="cv-role">Strategic Communication</p>
-          <div class="cv-meta">
-            <span>Santiago de Compostela · España</span>
-            <span>·</span>
-            <a href="mailto:laura@email.com">laura@email.com</a>
-            <span>·</span>
-            <a href="tel:+34123456789">+34 123 456 789</a>
-            <span>·</span>
-            <a target="_blank" rel="noopener" href="#">LinkedIn</a>
+          <p class="cv-role">Publicidad y Relaciones Públicas · Comunicación / Marketing / Diseño</p>
+
+          <!-- Chips de contacto -->
+          <div class="chips">
+            <span class="chip">📍 <small>Santiago de Compostela, ES</small></span>
+            <span class="chip">✉️ <a href="mailto:laumrqzz@gmail.com">laumrqzz@gmail.com</a></span>
+            <span class="chip">📱 <a href="tel:+34674513569">+34 674513569</a></span>
+            <span class="chip">🔗 <a href="https://www.linkedin.com/in/laura-m%C3%A1rquez-/" target="_blank" rel="noopener">LinkedIn</a></span>
           </div>
         </div>
         <figure class="cv-photo"><img src="img/laura.jpg" alt="Foto de Laura Marquez Carro"></figure>
       </div>
 
-      <!-- Resumen profesional -->
+      <!-- Sobre mí -->
       <div class="cv-section">
-        <h3>Resumen</h3>
-        <div class="cv-item">
-          Hola! Soy Laura una joven formada en el campo de la Publicidad, con una gran pasión en la creación visual y el
-          contenido digital. Actualmente el MBA de Administración de Empresas. Gozo de amplia experiencia en fotografía
-          y diseño gráfico. Me motiva el deseo de aprender constantemente y enfrentar nuevos retos, lo que me lleva a
-          tener una mente creativa y resolutiva.
-          Busco cada oportunidad de seguir desarrollando mis habilidades y contribuir en proyectos que generen un cambio
-          significativo. Creo firmemente que la comunicación efectiva puede transformar el mundo.
-          Siempre estoy abierta a nuevas colaboraciones y retos que me permitan seguir explorando el fascinante mundo de
-          la comunicación.
+        <h3>Sobre mí</h3>
+        <div class="cv-card">
+          Apasionada de la gestión de la comunicación, la reputación corporativa y la creación de contenidos audiovisuales
+          con impacto. Comprometida con la diversidad y la sostenibilidad. Aspiro a aportar valor en proyectos donde la
+          comunicación estratégica sea un puente entre personas, instituciones y marcas. Mi trayectoria combina creatividad,
+          empatía y organización.
         </div>
       </div>
 
-      <!-- Dos columnas: experiencia/proyectos y formación/habilidades -->
       <div class="cv-grid">
-
-        <!-- Izquierda -->
-        <div class="cv-col">
+        <!-- Columna izquierda: Experiencia + Proyectos -->
+        <div>
           <div class="cv-section">
-            <h3>Experiencia</h3>
-            <article class="cv-item">
-              <div class="when">2024 — Actualidad</div>
-              <div><strong>Consultora de Comunicación</strong> · Agencia XYZ</div>
-              <div class="where">A Coruña · Híbrido</div>
-              <ul>
-                <li>Diseño de planes de comunicación para lanzamientos.</li>
-                <li>Gestión de RRSS y coordinación con paid media.</li>
-                <li>Elaboración de press kits y relación con medios.</li>
-              </ul>
-            </article>
+            <h3>Experiencia profesional</h3>
+            <div class="timeline">
+              <article class="t-item cv-card">
+                <div class="when">Feb. — Abr. 2025</div>
+                <h4><strong>Prácticas académicas</strong> · Ayuntamiento de Teo</h4>
+                <div class="where">Teo · On-site</div>
+                <ul>
+                  <li>Proyectos de imagen para RRSS, fotografía de eventos y diseño para cartelería.</li>
+                  <li>Apoyo a la comunicación y promoción de programas culturales municipales.</li>
+                </ul>
+              </article>
 
-            <article class="cv-item">
-              <div class="when">Sep. 2021 – Sep. 2022</div>
-              <div><strong>Azafata de eventos y asesora técnica en protocolo e intermediaria de medios</strong> ·
-                Pont-Up Store</div>
-              <div class="where">Santiago de Compostela · On-site</div>
-              <ul>
-                <li>Responsable del cumplimiento del protocolo en el evento así como ayudante en la comunicación durante
-                  su celebración 2 años consecutivos.</li>
-              </ul>
-            </article>
+              <article class="t-item cv-card">
+                <div class="when">Jun. 2025</div>
+                <h4><strong>Azafata de eventos</strong> · Abanca Semana Verde de Silleda</h4>
+                <div class="where">Silleda · On-site</div>
+                <ul>
+                  <li>Representación del Ayuntamiento de Teo y atención a público nacional e internacional.</li>
+                </ul>
+              </article>
+
+              <article class="t-item cv-card">
+                <div class="when">2022 — 2024</div>
+                <h4><strong>Técnica · Dpto. Audiovisual</strong> · Agencia Junior Freshy Sweet</h4>
+                <div class="where">—</div>
+                <ul>
+                  <li>Creación de contenidos audiovisuales para redes y apoyo creativo.</li>
+                </ul>
+              </article>
+
+              <article class="t-item cv-card">
+                <div class="when">Sep. 2021 — Sep. 2022</div>
+                <h4><strong>Azafata & Protocolo</strong> · Pont-Up Store</h4>
+                <div class="where">Santiago de Compostela · On-site</div>
+                <ul>
+                  <li>Cumplimiento de protocolo y apoyo en comunicación (2 ediciones).</li>
+                </ul>
+              </article>
+            </div>
           </div>
 
-          <!-- Proyectos -->
           <div class="cv-section">
             <h3>Proyectos destacados</h3>
-            <article class="cv-item">
-              <div><strong>Campaña \"Marca Región\"</strong> — reposicionamiento turístico</div>
+            <article class="cv-card">
+              <h4 style="margin:0 0 6px"><strong>Campaña “Marca Región”</strong> — Reposicionamiento turístico</h4>
               <ul>
                 <li>Definición de relato y línea visual con dirección creativa.</li>
-                <li>Integración con medios digitales y prensa.</li>
+                <li>Integración con medios digitales y prensa; alcance estimado 1,2M.</li>
               </ul>
             </article>
 
-            <article class="cv-item">
-              <div><strong>Guía de Estilo y Mensajería</strong> — startup SaaS</div>
+            <article class="cv-card">
+              <h4 style="margin:0 0 6px"><strong>Guía de estilo y mensajería</strong> — Startup SaaS</h4>
               <ul>
-                <li>Creación de manual de tono y mensajes.</li>
-                <li>Reducción de tiempo de respuesta en 18%.</li>
+                <li>Manual de tono, claims y FAQs para soporte y marketing.</li>
+                <li>Reducción del tiempo de respuesta en 18% tras unificación de mensajes.</li>
               </ul>
             </article>
           </div>
         </div>
 
-        <!-- Derecha -->
-        <aside class="cv-col">
-          <!-- Formación -->
+        <!-- Columna derecha: Formación, Idiomas, Competencias, Herramientas -->
+        <aside>
           <div class="cv-section">
             <h3>Formación</h3>
-            <article class="cv-item">
-              <div class="when">2021 - 2025</div>
-              <div><strong>Grado de publicidad y relaciones públicas</strong></div>
+            <article class="cv-card">
+              <div class="when">2025 — en curso</div>
+              <div><strong>MBA · Máster en Dirección y Administración de Empresas</strong></div>
+              <div class="where">Galicia Business School</div>
+            </article>
+            <article class="cv-card">
+              <div class="when">2021 — 2025</div>
+              <div><strong>Grado en Publicidad y Relaciones Públicas</strong></div>
               <div class="where">Universidad de Vigo</div>
             </article>
-            <article class="cv-item">
-              <div class="when">2025 - Actualidad</div>
-              <div><strong>MBA Máster en dirección y administración de empresas </strong></div>
-              <div class="where">Galicia Business School </div>
-            </article>
           </div>
 
-          <!-- Competencias -->
           <div class="cv-section">
-            <h3>Competencias</h3>
-            <div class="cv-item">
-              <div class="tags" style="margin:0">
-                <span class="tag">Comunicación estratégica</span>
-                <span class="tag">Narrativa de marca</span>
-                <span class="tag">Planificación editorial</span>
-                <span class="tag">Gestión de medios</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Herramientas -->
-          <div class="cv-section">
-            <h3>Herramientas</h3>
-            <div class="cv-item">
-              <div class="tags" style="margin:0">
-                <span class="tag">Photoshop</span>
-                <span class="tag">Adobe</span>
-                <span class="tag">Illustrator</span>
-                <span class="tag">Canva</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Idiomas -->
-          <div class="cv-section">
-            <h3>Idiomas</h3>
-            <div class="cv-item">
+            <h3>Idiomas y certificados</h3>
+            <div class="cv-card">
               <ul style="margin:0; padding-left:18px">
                 <li>Español — Nativo</li>
                 <li>Gallego — Nativo</li>
-                <li>Inglés — B2/C1</li>
+                <li>Inglés — Certificado B2</li>
+                <li>Seguridad informática: defensa contra las artes oscuras digitales</li>
+                <li>Fundamentos de diseño gráfico con Illustrator y Photoshop (Universidad de Vigo)</li>
               </ul>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <h3>Competencias</h3>
+            <div class="cv-card">
+              <div class="tags" style="margin:0">
+                <span class="tag">Comunicación estratégica</span>
+                <span class="tag">Comunicación de crisis</span>
+                <span class="tag">Contenido y RRSS</span>
+                <span class="tag">Coordinación de proyectos</span>
+                <span class="tag">Protocolo de eventos</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <h3>Herramientas</h3>
+            <div class="cv-card">
+              <div class="tags" style="margin:0">
+                <span class="tag">Photoshop</span>
+                <span class="tag">Illustrator</span>
+                <span class="tag">Canva</span>
+                <span class="tag">Adobe</span>
+              </div>
             </div>
           </div>
         </aside>
@@ -332,5 +311,4 @@
     </section>
   </main>
 </body>
-
 </html>

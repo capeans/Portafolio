@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Formación — Laura Marquez Carro</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <!-- Encabezado con el logotipo y el menú de navegación -->
+  <!-- Header opaco -->
   <header>
     <div class="container nav">
-      <!-- Marca personal -->
-      <a class="brand" href="index.html">
-        <span class="logo">LM</span>
-        <span>Laura Marquez</span>
-      </a>
-
-      <!-- Menú de navegación -->
+      <a class="brand" href="index.html"><span class="logo">LM</span><span>Laura Marquez</span></a>
       <nav class="menu">
         <a href="projects.html">Proyectos</a>
         <a href="formacion.html" class="active">Formación</a>
@@ -27,53 +19,120 @@
     </div>
   </header>
 
-  <!-- Contenido principal -->
   <main class="container">
-    <!-- Título y descripción de la sección -->
+    <!-- Título principal -->
     <div class="section-title">
-      <h2>Formación</h2>
-      <p class="muted">Resumen de estudios y certificaciones.</p>
+      <h2 class="accent-title">Formación</h2>
+      <div class="chips">
+        <span class="chip">🎓 Académica</span>
+        <span class="chip">🤝 Voluntariado</span>
+        <span class="chip">🧾 Certificados</span>
+      </div>
     </div>
 
-    <!-- Tabla con historial académico -->
-    <table class="table">
-      <thead>
-        <!-- Encabezados de columna -->
-        <tr>
-          <th>Periodo</th>
-          <th>Título</th>
-          <th>Centro</th>
-          <th>Ubicación</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Fila 1: formación actual -->
-        <tr>
-          <td>2023 — 2025</td>
-          <td>Strategic Communication</td>
-          <td>Universidad / Centro</td>
-          <td>Ciudad, País</td>
-        </tr>
+    <!-- ==================== FORMACIÓN ACADÉMICA ==================== -->
+    <section class="forma-section">
+      <h3 class="accent-title">Formación Académica</h3>
+      <div class="edu-grid">
+        <!-- MBA -->
+        <article class="edu-card">
+          <div class="edu-head">
+            <h3 class="edu-title">MBA · Máster en Dirección y Administración de Empresas</h3>
+            <span class="edu-period">2025 — Actualidad</span>
+          </div>
+          <div class="edu-meta">Galicia Business School</div>
+          <div class="edu-tags">
+            <span class="edu-tag">Gestión</span>
+            <span class="edu-tag">Estrategia</span>
+          </div>
+        </article>
 
-        <!-- Fila 2: estudios anteriores -->
-        <tr>
-          <td>2019 — 2023</td>
-          <td>Grado / Diplomatura</td>
-          <td>Universidad / Centro</td>
-          <td>Ciudad, País</td>
-        </tr>
+        <!-- Grado -->
+        <article class="edu-card">
+          <div class="edu-head">
+            <h3 class="edu-title">Grado en Publicidad y Relaciones Públicas</h3>
+            <span class="edu-period">2021 — 2025</span>
+          </div>
+          <div class="edu-meta">Universidad de Vigo</div>
+          <div class="edu-tags">
+            <span class="edu-tag">Comunicación</span>
+            <span class="edu-tag">Relaciones Públicas</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
-        <!-- Fila 3: certificación adicional -->
-        <tr>
-          <td>Certificación</td>
-          <td>Nombre Certificación</td>
-          <td>Entidad</td>
-          <td>Año</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- ==================== VOLUNTARIADOS ==================== -->
+    <section class="forma-section">
+      <h3 class="accent-title">Voluntariados</h3>
+      <div class="edu-grid">
+        <article class="edu-card">
+          <div class="edu-head">
+            <h4 class="edu-title">Embajadora e investigadora — Junior Female Leaders (Seguridad y Defensa)</h4>
+            <span class="edu-period">2025</span>
+          </div>
+          <div class="edu-meta">Participación en proyectos de investigación y comunicación institucional con enfoque en liderazgo femenino y defensa.</div>
+          <div class="edu-tags">
+            <span class="edu-tag">Liderazgo</span>
+            <span class="edu-tag">Divulgación</span>
+          </div>
+        </article>
+
+        <article class="edu-card">
+          <div class="edu-head">
+            <h4 class="edu-title">Workcamp Illas Cíes — Parque Nacional Illas Atlánticas de Galicia</h4>
+            <span class="edu-period">2023</span>
+          </div>
+          <div class="edu-meta">Voluntariado ambiental enfocado en la conservación y mantenimiento de espacios naturales.</div>
+          <div class="edu-tags">
+            <span class="edu-tag">Sostenibilidad</span>
+            <span class="edu-tag">Equipo</span>
+          </div>
+        </article>
+
+        <article class="edu-card">
+          <div class="edu-head">
+            <h4 class="edu-title">Ayudante de monitor de ocio inclusivo — Deportea</h4>
+            <span class="edu-period">2023 — 2025</span>
+          </div>
+          <div class="edu-meta">Apoyo en actividades deportivas y recreativas inclusivas para personas con diversidad funcional.</div>
+          <div class="edu-tags">
+            <span class="edu-tag">Inclusión</span>
+            <span class="edu-tag">Deporte</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== CERTIFICADOS ==================== -->
+    <section class="forma-section">
+      <h3 class="accent-title">Certificados y Cursos</h3>
+      <div class="edu-grid">
+        <article class="edu-card">
+          <div class="edu-head">
+            <h4 class="edu-title">Seguridad informática: defensa contra las artes oscuras digitales</h4>
+            <span class="edu-period">2025</span>
+          </div>
+          <div class="edu-meta">No se.</div>
+          <div class="edu-tags">
+            <span class="edu-tag">Comunicación</span>
+            <span class="edu-tag">Institucional</span>
+          </div>
+        </article>
+
+        <article class="edu-card">
+          <div class="edu-head">
+            <h4 class="edu-title">Fundamentos de diseño gráfico con Illustrator y Photoshop</h4>
+            <span class="edu-period">2022</span>
+          </div>
+          <div class="edu-meta">Formación práctica en Photoshop, Illustrator y herramientas de diseño profesional para campañas visuales.</div>
+          <div class="edu-tags">
+            <span class="edu-tag">Diseño</span>
+            <span class="edu-tag">Adobe</span>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
-
 </body>
-
 </html>
