@@ -6,167 +6,166 @@
   <title>CV — Laura Marquez Carro</title>
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- Ajustes visuales específicos del CV (ligeros, sobre tu styles.css) -->
   <style>
-    /* ===== Mejora estética del CV (encima de styles.css) ===== */
+    /* ---- Contenedor y tarjeta principal ---- */
+    .cv { display: grid; gap: 28px; }
+    .cv.card{
+      padding: 42px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+      box-shadow: 0 22px 50px -26px rgba(0,0,0,.6);
+    }
 
-    /* Layout general del CV */
-    .cv { display: grid; gap: 22px; }
-
-    /* Cabecera */
-    .cv-header {
+    /* ---- Cabecera (nombre + datos + foto) ---- */
+    .cv-header{
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 20px;
+      gap: 26px;
       align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .cv-name {
-      font-size: clamp(30px, 4.2vw, 48px);
-      line-height: 1.05;
-      margin: 0 0 4px;
+    .cv-name{
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
       letter-spacing: .2px;
+      margin: 0 0 6px;
     }
-    .cv-role {
+    .cv-role{
       margin: 0;
       color: var(--muted);
-      font-size: clamp(16px, 2.1vw, 20px);
+      font-size: clamp(16px, 2vw, 20px);
     }
-
-    /* Foto circular con aro suave */
-    .cv-photo {
-      width: 120px; height: 120px; border-radius: 50%;
+    .cv-photo{
+      width: 132px; height: 132px; border-radius: 50%;
       overflow: hidden; position: relative;
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 10px 30px -15px rgba(0,0,0,.6);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 12px 30px -18px rgba(0,0,0,.6);
     }
     .cv-photo::after{
       content:""; position:absolute; inset:0; border-radius:50%;
-      box-shadow: inset 0 0 0 2px rgba(110,168,254,.18);
+      box-shadow: inset 0 0 0 2px rgba(255, 54, 70, .20);
       pointer-events:none;
     }
     .cv-photo img{ width:100%; height:100%; object-fit:cover; }
 
-    /* Chips de contacto */
-    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
+    /* ---- Chips de contacto legibles ---- */
+    .chips{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px }
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 12px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      font-size:14px; color: var(--text);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+      font-size:14px;
     }
     .chip a{ color:inherit; text-decoration:none; }
     .chip small{ color: var(--muted) }
 
-    /* Título de bloque con línea acento */
+    /* ---- Secciones: títulos y separación ---- */
+    .cv-section{ display:grid; gap: 12px; }
     .cv-section h3{
-      margin:0 0 10px; font-size:18px; letter-spacing:.2px;
-      position:relative; padding-left:12px;
-    }
-    .cv-section h3::before{
-      content:""; position:absolute; left:0; top:.35em;
-      width:6px; height:1.1em;
-      border-radius:6px;
-      background: linear-gradient(180deg, var(--brand), var(--brand2));
-      box-shadow: 0 0 0 1px rgba(110,168,254,.18);
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: .2px;
+      font-weight: 700;
     }
 
-    /* Tarjetas finas */
+    /* ---- Tarjetas internas con acento a la izquierda ---- */
     .cv-card{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;
+      position: relative;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
       background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      padding:16px;
+      padding:16px 18px 16px 18px;
+      transition: transform .2s, background .3s, border-color .3s;
+    }
+    .cv-card::before{
+      content:"";
+      position:absolute; left:-1px; top:10px; bottom:10px; width:4px;
+      border-radius:4px;
+      background: linear-gradient(180deg, var(--brand), var(--brand2));
+      opacity:.85;
+    }
+    .cv-card:hover{
+      transform: translateY(-2px);
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border-color: rgba(255,255,255,.16);
     }
 
-    /* Grid 2 columnas */
-    .cv-grid{ display:grid; grid-template-columns:1.25fr .85fr; gap:22px; }
-    @media (max-width: 900px){
-      .cv-header{ grid-template-columns: 1fr; }
-      .cv-grid{ grid-template-columns: 1fr; }
-    }
+    /* ---- Grid principal 2 columnas (experiencia vs lateral) ---- */
+    .cv-grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap: 26px; }
+    @media (max-width: 980px){ .cv-grid{ grid-template-columns: 1fr; } .cv-header{ grid-template-columns: 1fr; } }
 
-    /* Timeline de experiencia */
-    .timeline{ position:relative; display:grid; gap:14px; }
-    .timeline::before{
-      content:""; position:absolute; left:12px; top:0; bottom:0;
-      width:2px; background: linear-gradient(180deg, rgba(110,168,254,.5), rgba(126,240,214,.3));
-      border-radius:2px; opacity:.7;
-    }
-    .t-item{
-      position:relative; padding-left:34px;
-    }
-    .t-item::before{
-      content:""; position:absolute; left:6px; top:6px;
-      width:12px; height:12px; border-radius:50%;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 0 0 3px rgba(110,168,254,.25);
-    }
-    .when{ color:#9fb5ff; font-weight:600; font-size:14px; }
-    .where{ color:#cbd3ea; font-size:14px; }
-    .t-item h4{ margin:.5px 0 6px; font-size:16px; }
+    /* ---- Experiencia: tarjetas apiladas, claras ---- */
+    .when{ color: var(--brand2); font-weight: 600; font-size: 14px; }
+    .where{ color:#cbd3ea; font-size: 14px; }
+    .cv-card h4{ margin:.5px 0 6px; font-size:16px; line-height:1.35 }
+    .cv-card ul{ margin: 10px 0 0; padding-left: 18px; }
+    .cv-card li{ margin: 6px 0; line-height: 1.55; }
 
-    /* Lista compacta y legible */
-    .t-item ul, .cv-card ul{ margin:8px 0 0; padding-left:18px }
-    .t-item li, .cv-card li{ margin:4px 0 }
-
-    /* Etiquetas */
+    /* ---- Etiquetas ---- */
     .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px }
     .tag{
-      padding:5px 10px; border-radius:999px;
-      border:1px solid rgba(110,168,254,.35);
-      background: rgba(110,168,254,.12);
-      font-size:12px; color:#d9e9ff;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,54,70,.35);
+      background: rgba(255,54,70,.12);
+      font-size:12px; color:#ffecef;
     }
 
-    /* Acciones (descargar/imprimir) */
+    /* ---- Acciones (descargar / imprimir) visibles ---- */
     .cv-actions{ display:flex; gap:10px; flex-wrap:wrap }
-    .btn.ghost{
-      background: transparent; border-color: rgba(255,255,255,.14);
+    .cv-actions .btn{
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color:#fff; font-weight:700; border:none;
+      transition: transform .2s, background .3s;
     }
+    .cv-actions .btn:hover{ transform: translateY(-2px); background: linear-gradient(135deg, var(--brand2), var(--brand)); }
 
-    /* Impresión A4 limpia */
+    /* ---- Header opaco (por si el base cambia) ---- */
+    header{ background: var(--panel); backdrop-filter: none; border-bottom: 1px solid rgba(255,255,255,.10); }
+
+    /* ---- Impresión limpia ---- */
     @media print{
       header, .cv-actions { display:none !important; }
       body{ background:#fff; color:#111 }
       .card{ box-shadow:none; border:0 }
-      .cv-photo::after{ box-shadow: inset 0 0 0 0 transparent }
       a{ color:#000; text-decoration:none }
     }
   </style>
 </head>
 
 <body>
-  <!-- Cabecera mínima del sitio -->
+  <!-- Header -->
   <header>
-    <div class="container nav">
+    <div class="container nav" role="navigation" aria-label="Navegación principal">
       <a class="brand" href="index.html"><span class="logo">LM</span><span>Laura Marquez</span></a>
       <nav class="menu">
         <a href="projects.html">Proyectos</a>
         <a href="formacion.html">Formación</a>
-        <a href="cv.html" class="active">CV</a>
+        <a href="cv.html" class="active" aria-current="page">CV</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <!-- Encabezado de la página + acciones -->
+    <!-- Título + acciones -->
     <div class="section-title">
-      <h2 class="accent-title">Currículum</h2>
+      <h2 style="margin:0">Currículum</h2>
       <div class="cv-actions">
-        <a class="btn primary" href="docs/CV.pdf" download>Descargar CV (PDF)</a>
-        <button class="btn ghost" onclick="window.print()">Imprimir / Guardar como PDF</button>
+        <a class="btn" href="docs/CV.pdf" download aria-label="Descargar CV en PDF">Descargar CV (PDF)</a>
+        <button class="btn" onclick="window.print()" aria-label="Imprimir o guardar como PDF">Imprimir / Guardar PDF</button>
       </div>
     </div>
 
-    <!-- Bloque de CV -->
+    <!-- CV -->
     <section class="cv card">
       <!-- Cabecera personal -->
       <div class="cv-header">
         <div>
           <h1 class="cv-name">Laura Marquez Carro</h1>
           <p class="cv-role">Publicidad y Relaciones Públicas · Comunicación / Marketing / Diseño</p>
-
-          <!-- Chips de contacto -->
           <div class="chips">
             <span class="chip">📍 <small>Santiago de Compostela, ES</small></span>
             <span class="chip">✉️ <a href="mailto:laumrqzz@gmail.com">laumrqzz@gmail.com</a></span>
@@ -174,7 +173,7 @@
             <span class="chip">🔗 <a href="https://www.linkedin.com/in/laura-m%C3%A1rquez-/" target="_blank" rel="noopener">LinkedIn</a></span>
           </div>
         </div>
-        <figure class="cv-photo"><img src="img/laura.jpg" alt="Foto de Laura Marquez Carro"></figure>
+        <figure class="cv-photo" aria-hidden="true"><img src="img/laura.jpg" alt="Foto de Laura Marquez Carro"></figure>
       </div>
 
       <!-- Sobre mí -->
@@ -188,53 +187,53 @@
         </div>
       </div>
 
-      <div class="cv-grid">
-        <!-- Columna izquierda: Experiencia + Proyectos -->
+      <div class="cv-grid" role="region" aria-label="Contenido principal del currículum">
+        <!-- Columna izquierda: Experiencia -->
         <div>
           <div class="cv-section">
             <h3>Experiencia profesional</h3>
-            <div class="timeline">
-              <article class="t-item cv-card">
-                <div class="when">Feb. — Abr. 2025</div>
-                <h4><strong>Prácticas académicas</strong> · Ayuntamiento de Teo</h4>
-                <div class="where">Teo · On-site</div>
-                <ul>
-                  <li>Proyectos de imagen para RRSS, fotografía de eventos y diseño para cartelería.</li>
-                  <li>Apoyo a la comunicación y promoción de programas culturales municipales.</li>
-                </ul>
-              </article>
 
-              <article class="t-item cv-card">
-                <div class="when">Jun. 2025</div>
-                <h4><strong>Azafata de eventos</strong> · Abanca Semana Verde de Silleda</h4>
-                <div class="where">Silleda · On-site</div>
-                <ul>
-                  <li>Representación del Ayuntamiento de Teo y atención a público nacional e internacional.</li>
-                </ul>
-              </article>
+            <article class="cv-card">
+              <div class="when">Feb. — Abr. 2025</div>
+              <h4><strong>Prácticas académicas</strong> · Ayuntamiento de Teo</h4>
+              <div class="where">Teo · On-site</div>
+              <ul>
+                <li>Proyectos de imagen para RRSS, fotografía de eventos y diseño para cartelería.</li>
+                <li>Apoyo a la comunicación y promoción de programas culturales municipales.</li>
+              </ul>
+            </article>
 
-              <article class="t-item cv-card">
-                <div class="when">2022 — 2024</div>
-                <h4><strong>Técnica · Dpto. Audiovisual</strong> · Agencia Junior Freshy Sweet</h4>
-                <div class="where">—</div>
-                <ul>
-                  <li>Creación de contenidos audiovisuales para redes y apoyo creativo.</li>
-                </ul>
-              </article>
+            <article class="cv-card">
+              <div class="when">Jun. 2025</div>
+              <h4><strong>Azafata de eventos</strong> · Abanca Semana Verde de Silleda</h4>
+              <div class="where">Silleda · On-site</div>
+              <ul>
+                <li>Representación del Ayuntamiento de Teo y atención a público nacional e internacional.</li>
+              </ul>
+            </article>
 
-              <article class="t-item cv-card">
-                <div class="when">Sep. 2021 — Sep. 2022</div>
-                <h4><strong>Azafata & Protocolo</strong> · Pont-Up Store</h4>
-                <div class="where">Santiago de Compostela · On-site</div>
-                <ul>
-                  <li>Cumplimiento de protocolo y apoyo en comunicación (2 ediciones).</li>
-                </ul>
-              </article>
-            </div>
+            <article class="cv-card">
+              <div class="when">2022 — 2024</div>
+              <h4><strong>Técnica · Dpto. Audiovisual</strong> · Agencia Junior Freshy Sweet</h4>
+              <div class="where">—</div>
+              <ul>
+                <li>Creación de contenidos audiovisuales para redes y apoyo creativo.</li>
+              </ul>
+            </article>
+
+            <article class="cv-card">
+              <div class="when">Sep. 2021 — Sep. 2022</div>
+              <h4><strong>Azafata & Protocolo</strong> · Pont-Up Store</h4>
+              <div class="where">Santiago de Compostela · On-site</div>
+              <ul>
+                <li>Cumplimiento de protocolo y apoyo en comunicación (2 ediciones).</li>
+              </ul>
+            </article>
           </div>
+        </div>
 
-        <!-- Columna derecha: Formación, Idiomas, Competencias, Herramientas -->
-        <aside>
+        <!-- Columna derecha: Formación / Idiomas y certificados / Competencias / Herramientas -->
+        <aside aria-label="Información adicional">
           <div class="cv-section">
             <h3>Formación</h3>
             <article class="cv-card">
